@@ -44,6 +44,34 @@ void WebServer::init(int port , string user, string passWord, string databaseNam
     m_actormodel = actor_model;
 }
 
+void WebServer::trig_mode()
+{
+    //LT + LT
+    if (0 == m_TRIGMode)
+    {
+        m_LISTENTrigmode = 0;
+        m_CONNTrigmode = 0;
+    }
+    //LT + ET
+    else if (1 == m_TRIGMode)
+    {
+        m_LISTENTrigmode = 0;
+        m_CONNTrigmode = 1;
+    }
+    //ET + LT
+    else if (2 == m_TRIGMode)
+    {
+        m_LISTENTrigmode = 1;
+        m_CONNTrigmode = 0;
+    }
+    //ET + ET
+    else if (3 == m_TRIGMode)
+    {
+        m_LISTENTrigmode = 1;
+        m_CONNTrigmode = 1;
+    }
+}
+
 void WebServer::log_write(){
     if(m_close_log == 0){
         if(m_log_write == 1)
