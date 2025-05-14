@@ -15,6 +15,8 @@
 #include <string>
 
 #include "log/log.h"
+#include "CGImysql/sql_connection_pool.h"
+#include "http/http_conn.h"
 
 using namespace std;
 
@@ -56,10 +58,10 @@ public:
 
     int m_pipefd[2];
     int m_epollfd;
-    // http_conn *users;
+    http_conn *users;
 
     //数据库相关
-    // connection_pool *m_connPool;
+    connection_pool *m_connPool;
     string m_user;         //登陆数据库用户名
     string m_passWord;     //登陆数据库密码
     string m_databaseName; //使用数据库名
