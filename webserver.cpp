@@ -83,7 +83,13 @@ void WebServer::log_write(){
         else{
             Log::get_instance()->init("./ServerLog", m_close_log, 2000, 800000, 0);
             // printf("m_log_write = %d", m_log_write);
+            LOG_DEBUG("LOG DEBUG WORKING? %d\n", m_log_write);
         }
             
     }
+}
+
+void WebServer::sql_pool()
+{
+    
 }
