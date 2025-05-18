@@ -106,16 +106,17 @@ void WebServer::thread_pool()
 
 void WebServer::eventListen()
 {
+     //网络编程基础步骤
     m_listenfd = socket(PF_INET, SOCK_STREAM, 0);
     assert(m_listenfd >= 0);
 
     //优雅关闭连接
-    if(m_OPT_LINGER == 0)
+    if (0 == m_OPT_LINGER)
     {
         struct linger tmp = {0, 1};
         setsockopt(m_listenfd, SOL_SOCKET, SO_LINGER, &tmp, sizeof(tmp));
     }
-    else if(m_OPT_LINGER == 1)
+    else if (1 == m_OPT_LINGER)
     {
         struct linger tmp = {1, 1};
         setsockopt(m_listenfd, SOL_SOCKET, SO_LINGER, &tmp, sizeof(tmp));
@@ -125,8 +126,8 @@ void WebServer::eventListen()
     struct sockaddr_in address;
     bzero(&address, sizeof(address));
     address.sin_family = AF_INET;
-    address.sin_port = htons(m_port);
     address.sin_addr.s_addr = htonl(INADDR_ANY);
+    address.sin_port = htons(m_port);
 
     int flag = 1;
     setsockopt(m_listenfd, SOL_SOCKET, SO_REUSEADDR, &flag, sizeof(flag));
